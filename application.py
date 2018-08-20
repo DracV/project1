@@ -1,5 +1,6 @@
 import os
 
+from flask import Flask, render_template
 from flask import Flask, session
 from flask_session import Session
 from sqlalchemy import create_engine
@@ -23,4 +24,43 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 def index():
-    return "Project 1: TODO"
+    headline = "My CS50W Book Review Website"
+    return render_template ("index.html", headline=headline)
+
+# users should be able to register
+@app.route("/register")
+def register():
+    return render_template ("register.html")
+
+# users should be able to login
+@app.route("/login")
+def login():
+    return "Login here"
+
+# users should be able to logout
+@app.route("/logout")
+def logout():
+    return "Logout here"
+
+# users should be able to Search
+@app.route("/search")
+def search():
+    return "Search here"
+
+# users should be able to Book Page
+@app.route("/books")
+def books():
+    return "Books here"
+
+
+
+
+
+#   for login
+#   <container id="main">
+#       {% if logged in %}
+#            <body> Show everything </body>
+#       {% else %}  not logged in
+#           <body> login form </body>
+#       {% endif %}
+#
