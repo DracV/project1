@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask import Flask, session
 from flask_session import Session
 from sqlalchemy import create_engine
@@ -28,9 +28,13 @@ def index():
     return render_template ("index.html", headline=headline)
 
 # users should be able to register
-@app.route("/register")
+@app.route("/register", methods=["GET","POST"])
 def register():
-    return render_template ("register.html")
+    if request.method =="GET":
+        return "Please submit the form."
+    else:
+        name = request.form.get("name")
+        return render_template ("register.html", name=name)
 
 # users should be able to login
 @app.route("/login")
