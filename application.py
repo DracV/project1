@@ -28,7 +28,7 @@ def index():
     headline = "My CS50W Book Review Website"
     return render_template ("index.html", headline=headline)
 
-# users should be able to register
+# users should be able to register TODO
 @app.route("/register", methods=["GET","POST"])
 def register():
     if request.method =="GET":
@@ -37,25 +37,22 @@ def register():
         name = request.form.get("name")
         return render_template ("register.html", name=name)
 
-# users should be able to login
+# users should be able to login   TODO
 @app.route("/login")
 def login():
     return "Login here"
 
-# users should be able to logout
+# users should be able to logout TODO
 @app.route("/logout")
 def logout():
     return "Logout here"
 
-# users should be able to Search
+# users should be able to Search TODO
 @app.route("/search")
 def search():
-    return "Search here"
+    return render_template ("search.html")
 
-
-
-
-# users should be able to Book Page
+# users should be able to Book Page  TODO
 @app.route("/books", methods=["GET", "POST"])
 def books():
     if session.get("books") is None:

@@ -6,8 +6,18 @@
 
 {% block body %}
       <p>
-          A list of books from the database
+          <strong>Book Page:</strong> When users click on a book from the results of the search page, they should be taken to a book page,
+           with details about the book: its title, author, publication year, ISBN number, and any reviews that users have
+           left for the book on your website.
       </p>
+      <p><strong>Review Submission:</strong> On the book page, users should be able to submit a review: consisting of a rating on a scale of 1 to 5, as well
+        as a text component to the review where the user can write their opinion about a book. Users should not be able to submit multiple
+        reviews for the same book.
+      </p>
+      <p><strong>Goodreads Review Data:</strong> On your book page, you should also display (if available) the average rating and number of ratings the work
+        has received from Goodreads.
+      </p>
+
           <ul>
                 {% for book in books %}
                 <li>{{ book }}</li>
