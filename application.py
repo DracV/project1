@@ -1,7 +1,6 @@
 import os
 
-from flask import Flask, render_template, request
-from flask import Flask, session
+from flask import Flask, render_template, request, session
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -17,9 +16,11 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
+
 
 
 @app.route("/")
@@ -51,10 +52,19 @@ def logout():
 def search():
     return "Search here"
 
+
+
+
 # users should be able to Book Page
-@app.route("/books")
+@app.route("/books", methods=["GET", "POST"])
 def books():
-    return "Books here"
+    if session.get("books") is None:
+        session["books"] = []
+    if request.method == "POST":
+        book = request.form.get("book")
+        session["books"].append(book)
+
+    return render_template ("books.html", books=session["books"])
 
 
 

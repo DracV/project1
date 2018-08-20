@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+      Books page
+{% endblock %}
+
+{% block body %}
+      <p>
+          A list of books from the database
+      </p>
+          <ul>
+                {% for book in books %}
+                <li>{{ book }}</li>
+                {% endfor %}
+          </ul>
+
+          <form action="{{ url_for('books') }}" method="post">
+            <input type="text" name="book" placeholder="Enter a Book here">
+            <button>Add Book</button>
+
+
+          </form>
+
+
+{% endblock %}
