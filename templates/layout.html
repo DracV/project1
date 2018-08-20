@@ -3,14 +3,14 @@
     <head>
         <title>CS50W Book Review Website!</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="templates/css/styles.css">
     <!-- Latest compiled and minified CSS Bootstrap4 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
     <body>
       <!-- Begin Bootstrap nav component -->
       <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-success">
               <a class="navbar-brand" href="#">Project1</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,9 +34,11 @@
             </nav>
       </header>
           <!-- End Header -->
-        <h1>{% block heading %}{% endblock %}</h1>
-
-        {% block body %}
-        {% endblock %}
+          <!--Begin Main div -->
+      <div id="main">
+              <h1>{% block heading %}{% endblock %}</h1>
+          {% block body %}
+          {% endblock %}
+      </div>
     </body>
 </html>
