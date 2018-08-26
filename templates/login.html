@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+      Login Here
+{% endblock %}
+
+{% block body %}
+
+
+
+
+  <p>Please Login below</p>
+<form action="{{ url_for('login') }}" method="post">
+    <input type="text" name="username" value="{{request.form['username']}}">
+    <input type="password" name="password" value="{{request.form['password']}}">
+    <button>Submit</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

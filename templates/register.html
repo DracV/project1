@@ -1,17 +1,21 @@
 {% extends "layout.html" %}
 
 {% block heading %}
-      Registration page
+      {{headline}}
 {% endblock %}
 
 {% block body %}
       <p>
-          Please fill out the registration form
+          Please fill out the registration form below
       </p>
+    <form action="{{ url_for('newuser') }}" method="post">
+        <input type="text" name="username" placeholder="Username" value="{{request.form['username']}}">
+        <input type="email" name="email" placeholder="Email" value="{{request.form['email']}}">
+        <input type="password" name="password" placeholder="Password" value="{{request.form['password']}}">
+        <button>Submit</button>
+    </form>
+      <p>Hello, {{request.form['username']}} </p>
 
-      Hello, {{ name }}
-
-
-
+      <h1>  {{ message }} </h1>
 
 {% endblock %}

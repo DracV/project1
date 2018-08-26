@@ -16,31 +16,49 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
-
-
 
 @app.route("/")
 def index():
     headline = "My CS50W Book Review Website"
     return render_template ("index.html", headline=headline)
 
-# users should be able to register TODO
 @app.route("/register", methods=["GET","POST"])
 def register():
-    if request.method =="GET":
-        return "Please submit the form."
-    else:
-        name = request.form.get("name")
-        return render_template ("register.html", name=name)
+    headline = "Register Here"
+    return render_template ("register.html", headline=headline)
 
-# users should be able to login   TODO
-@app.route("/login")
-def login():
-    return "Login here"
+
+# users should be able to register TODO
+@app.route("/newuser", methods=["POST"])
+def newuser():
+    #get user and pass and check if correct
+        name = request.form.get('username')
+        email = request.form.get("email")
+        password = request.form.get("password")
+        if db.execute("SELECT * FROM users WHERE name = :name",{"name": name}).rowcount == 1:
+            return render_template("/newuser", message="User name already taken")
+        #if user != 'admin' or password != 'admin':
+            #return render_template("register.html", message="Passwords wrong!")
+        else:
+            db.execute("INSERT INTO users (name, email, pass) VALUES (:name, :email, :pass)",
+                {"name": name, "email": email, "pass": password})
+            db.commit()
+            return render_template("success.html", message="Registration successful!")
+
+
+#@app.route('/login', methods=['POST'])
+#def login():
+    #user = request.form.get('username')
+    #password = request.form.get("password")
+    #if user != 'admin' or password != 'admin':
+    #    return render_template("register.html", message="Passwords wrong!")
+    #else:
+    #    return render_template('login.html', message="You are logged in")
+
+
 
 # users should be able to logout TODO
 @app.route("/logout")
@@ -65,16 +83,6 @@ def books():
 
 
 
-
-
-#   for login
-#   <container id="main">
-#       {% if logged in %}
-#            <body> Show everything </body>
-#       {% else %}  not logged in
-#           <body> login form </body>
-#       {% endif %}
-#
 
 
 
