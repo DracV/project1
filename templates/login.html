@@ -11,18 +11,20 @@
 
   <p>Please Login below</p>
 <form action="{{ url_for('login') }}" method="post">
-    <input type="text" name="username" value="{{request.form['username']}}">
-    <input type="password" name="password" value="{{request.form['password']}}">
+    <input type="text" name="username" placeholder="Username" value="{{request.form['username']}}">
+    <input type="password" name="password" placeholder="Password" value="{{request.form['password']}}">
     <button>Submit</button>
 </form>
 
+<ul>
+    {% for user in user %}
+        <li>{{ user.name }}</li>
+        <li>{{ user.email }}</li>
+        <li>{{ user.pass }}</li>
+</ul>
+{% endfor %}
 
-
-
-
-
-
-
-
+<p>Hello, {{request.form['username']}} </p>
+<h1> {{ message }}</h1>
 
 {% endblock %}

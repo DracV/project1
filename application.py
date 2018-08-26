@@ -27,13 +27,16 @@ def index():
 
 @app.route("/register", methods=["GET","POST"])
 def register():
+    """Register for website"""
+
     headline = "Register Here"
     return render_template ("register.html", headline=headline)
 
-
-# users should be able to register TODO
+# users should be able to register
 @app.route("/newuser", methods=["POST"])
 def newuser():
+        """Add a new User"""
+
     #get user and pass and check if correct
         name = request.form.get('username')
         email = request.form.get("email")
@@ -48,17 +51,21 @@ def newuser():
             db.commit()
             return render_template("success.html", message="Registration successful!")
 
+# users should be able to login TODO
+@app.route("/login", methods=["GET","POST"])
+def login():
+    """Log In to website"""
+    headline = "LogIn Here"
+    # Get account information. - Name and Pass
+    name = request.form.get("username")
+    password = request.form.get("password")
+    user = db.execute("SELECT * FROM users WHERE name =:name", {"name": name}).fetchall()
 
-#@app.route('/login', methods=['POST'])
-#def login():
-    #user = request.form.get('username')
-    #password = request.form.get("password")
-    #if user != 'admin' or password != 'admin':
-    #    return render_template("register.html", message="Passwords wrong!")
+    #return render_template("login.html", message="Password doesn't match our records.")
+    #db.execute("SELECT * FROM users WHERE name = :name, pass = :password", {"name": name, "pass": password}).fetchall() == 1
+    return render_template("login.html", user=user)
     #else:
-    #    return render_template('login.html', message="You are logged in")
-
-
+        #return render_template("login.html", message="Sorry")
 
 # users should be able to logout TODO
 @app.route("/logout")
