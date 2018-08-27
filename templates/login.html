@@ -16,15 +16,8 @@
     <button>Submit</button>
 </form>
 
-<ul>
-    {% for user in user %}
-        <li>{{ user.name }}</li>
-        <li>{{ user.email }}</li>
-        <li>{{ user.pass }}</li>
-</ul>
-{% endfor %}
 
-<p>Hello, {{request.form['username']}} </p>
 <h1> {{ message }}</h1>
+
 
 {% endblock %}

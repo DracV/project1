@@ -42,7 +42,7 @@ def newuser():
         email = request.form.get("email")
         password = request.form.get("password")
         if db.execute("SELECT * FROM users WHERE name = :name",{"name": name}).rowcount == 1:
-            return render_template("/newuser", message="User name already taken")
+            return render_template("/error.html", message="User name already taken")
         #if user != 'admin' or password != 'admin':
             #return render_template("register.html", message="Passwords wrong!")
         else:
@@ -59,13 +59,17 @@ def login():
     # Get account information. - Name and Pass
     name = request.form.get("username")
     password = request.form.get("password")
+    #session['username'] = name
+    #session['password'] = password
     user = db.execute("SELECT * FROM users WHERE name =:name", {"name": name}).fetchall()
+    if not user or not name or not password:
+        return render_template('login.html', message="Missing Username or Password", logIn=False)
+    else:
+        #Test if submitted pass is legit
+        if password == user[0][3]:
+            return render_template("login.html", message="The password and username match")
+        return render_template("login.html", message="Incorrect Username and/or password.")
 
-    #return render_template("login.html", message="Password doesn't match our records.")
-    #db.execute("SELECT * FROM users WHERE name = :name, pass = :password", {"name": name, "pass": password}).fetchall() == 1
-    return render_template("login.html", user=user)
-    #else:
-        #return render_template("login.html", message="Sorry")
 
 # users should be able to logout TODO
 @app.route("/logout")
